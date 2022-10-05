@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+#define ll long long 
+#define tc testcases
+#define pb push_back
+using namespace std;
+ 
+int main()
+{
+    int tc;
+    cin >> tc;
+    
+    while(tc--){
+        int n;
+        cin >> n;
+        
+        vector<int> d;
+        for(int i = 0; i < n; i++){
+            int x; cin >> x;
+            d.pb(x);
+        }
+        
+        vector<int> a1(n, d[0]);
+        vector<int> a2(n, d[0]);
+        
+        for(int i = 1; i < n; i++){
+            a1[i] = d[i] + a1[i-1];
+        }
+        
+        bool flag = true;
+        for(int i = 1; i < n; i++){
+            a2[i] = a1[i-1] - d[i];
+            if(a2[i] >= 0 && a2[i] != a1[i]){
+                flag = false;
+            }
+        }
+        
+        // for(int i = 0; i < n; i++){
+        //      cout << a2[i] << " ";
+        // }
+        
+        if(flag){
+            for(int i = 0; i < n; i++){
+                cout << a1[i] << " ";
+            }
+            cout << endl;
+        }
+        else{
+            cout << -1 << endl;
+        }
+        
+    }
+ 
+    return 0;
+}
